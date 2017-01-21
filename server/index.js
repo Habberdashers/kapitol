@@ -14,7 +14,7 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'test')
 
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
-    app.use(express.static(path.join(__dirname, '../client')));
+    app.use(express.static(process.env.CLIENT_PATH));
 
     //var govTrack = require('govtrack-node');
 
