@@ -5,27 +5,36 @@ const logger = require('./utils/logger');
 
 
 if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'members') {
-    const UserResponseHandler = require('./handlers/user-response-handler');
     const _ = require('underscore');
     const requestHandler = require('./handlers/request-handler');
     const jsonFile = require('jsonfile');
     const path = require('path');
 
     requestHandler.makeRequest(
-        'https://www.govtrack.us/api/v2/vote_voter/?vote=1&limit=441',
-        (error, members) => {
+        'https://congress.api.sunlightfoundation.com/bills',
+        (error, data) => {
             if (error) {
                 return logger(error);
             }
 
-            const userResponseHandler = new UserResponseHandler(members.objects);
-            userResponseHandler.processData();
-            jsonFile.writeFileSync(
-                path.join(__dirname, 'files/members.json'),
-                userResponseHandler.getParsedMembers()
-            );
+            logger('count:', data.count);
+
+            _.each(data.results, function(datum) {
+                logger(datum, '\n');
+            });
         }
     );
+} else if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'sun') {
+    const _ = require('underscore');
+    const SunlightHandler = require('./handlers/sunlight-handler');
+
+    const sunlightHandler = new SunlightHandler('bill', 'legislators', 'house', 'climate', function(error, data) {
+        if (error) return logger(error);
+
+        logger('got data with count:', data);
+    });
+
+    sunlightHandler.fetch();
 } else {
     const bodyParser = require('body-parser');
     const express = require('express');
