@@ -1,5 +1,6 @@
-import React from 'react'; 
+import React from 'react';
 import SearchForm from './searchForm';
+import Mission from './mission';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import {Link} from 'react-router';
@@ -12,11 +13,11 @@ class PageContainer extends React.Component {
 	}
 
 	getApiData () {
-		this.props.dispatch(actions.getApiData()); 
+		this.props.dispatch(actions.getApiData());
 	}
 
 	onSearchSubmit (searchTerm) {
-		console.log('term', searchTerm); 
+		console.log('term', searchTerm);
 		this.props.dispatch(actions.getMemberData(searchTerm));
 	}
 
@@ -34,7 +35,7 @@ class PageContainer extends React.Component {
 		)
 	}
 }
-
+//
 const mapStateToProps = (state) => ({
 	data: [state.data]
 })

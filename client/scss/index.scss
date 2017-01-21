@@ -1,61 +1,97 @@
 * {
-	box-sizing: border-box; 
+	box-sizing: border-box;
 	font-family: 'Lato', sans-serif;
+}
+
+body{
+  margin:0; //get rid of white border around colored backgrounds
 }
 
 .landing-page {
    display: flex;
    flex-direction: column;
   	align-items: center;
-  	position: relative; 
-  	top: 160px; 
+  	position: relative;
+  	top: 160px;
 }
 
 .landing-page h1 {
 	color: red;
-	font-size: 1.8rem; 
+	font-size: 1.8rem;
 }
 
 .search-form input {
 	width: 500px;
    height: 40px;
-   padding: 10px; 
+   padding: 10px;
    font-size: 1.2rem;
    border: 1px solid lightgray;
    border-radius: 1px;
    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.04);
-   margin-top: 20px; 
+   margin-top: 20px;
 }
 
 .logo {
-	width: 350px; 
+	width: 350px;
 }
 
 .scroll-btn {
-	width: 75px; 
+	width: 75px;
 	margin-top: 200px;
 }
 
+////////////////
+//Mission Page//
+///////////////
+.mission-main {
+  background-color: #E22136;
+  height:100vh;
+}
+.missionStatement {
+  color:white;
+  position:absolute;;
+  width: 500px;
+  height: 300px;
+  position: absolute;
 
-@media screen 
-  and (min-device-width: 1200px) 
-  and (max-device-width: 1600px) 
-  and (-webkit-min-device-pixel-ratio: 1) { 
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.missionStatement #columns{
+  -webkit-column-count:2;
+}
+.missionStatement h3{
+  font-size: 30px;
+}
+
+.missionStatement p{
+  margin:0;
+  font-size: 16px;
+}
+
+
+@media screen
+  and (min-device-width: 1200px)
+  and (max-device-width: 1600px)
+  and (-webkit-min-device-pixel-ratio: 1) {
   	.logo {
-  		width: 400px; 
+  		width: 400px;
   	}
 }
 
 
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
   and (-webkit-min-device-pixel-ratio: 1) {
 
 }
 
-@media only screen 
-  and (min-device-width: 320px) 
+@media only screen
+  and (min-device-width: 320px)
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
 
