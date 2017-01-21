@@ -12,12 +12,16 @@ class PageContainer extends React.Component {
 		this.props.dispatch(actions.getApiData()); 
 	}
 
+	onSearchSubmit (searchTerm) {
+		console.log('term', searchTerm); 
+		this.props.dispatch(actions.getMemberData(searchTerm));
+	}
 
 	render () {
 		return (
-			<div>
+			<div className="landing-page">
 				<h1>Kapitol</h1>
-				<SearchForm />
+				<SearchForm onSubmit={this.onSearchSubmit.bind(this)}/>
 			</div>
 		)
 	}

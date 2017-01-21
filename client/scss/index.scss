@@ -1,0 +1,26 @@
+* {
+	box-sizing: border-box; 
+	font-family: 'Lato', sans-serif;
+}
+
+.landing-page {
+   display: flex;
+   flex-direction: column;
+  	align-items: center;
+  	position: relative; 
+  	top: 100px; 
+}
+
+.landing-page h1 {
+	color: red;
+	font-size: 1.8rem; 
+}
+
+.search-form input {
+	width: 500px;
+   height: 40px;
+   font-size: 1.2rem;
+   border: 1px solid lightgray;
+   border-radius: 1px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.04);
+}
