@@ -61,6 +61,16 @@ body{
 	float:left;
 }
 
+.BarGraph{
+	margin-top: 100px;
+	margin: 10px;
+	padding-bottom: 500px;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.07);
+}
+
+
 ////////////////
 //Mission Page//
 ///////////////
@@ -98,20 +108,41 @@ body{
   font-size: 20px;
 }
 
+.members-container{
+	margin:20px;
+	padding:10px;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.07);
+}
+
 .member-picture {
   width: 250px;
   margin: 0 auto;
 }
 
 .member-info-container {
+	display:inline-block;
   width: 300px;
   padding: 10px;
   margin: 30px;
+	display: inline-block;
 }
+
+.analytics-container {
+	position:absolute;
+	display:inline-block;
+	align-self: auto;
+	margin-left: 30px;
+	margin-top: 50px
+}
+
+
 
 .member-details {
   padding-left: 0;
 }
+
 .member-details li {
   list-style: none;
 }
