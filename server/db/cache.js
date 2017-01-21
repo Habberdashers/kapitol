@@ -32,8 +32,10 @@ module.exports = {
             } else if (names.length === 1 && member.firstName.toLowerCase().includes(names[0].toLowerCase())) {
                 filteredMembers.push(member);
             } else if (
+
                 member.firstName.toLowerCase().includes(names[0].toLowerCase()) &&
                 member.lastName.toLowerCase().includes(names[names.length - 1].toLowerCase())
+
             ) {
                 filteredMembers.push(member);
             }

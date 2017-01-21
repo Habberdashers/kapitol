@@ -28,16 +28,37 @@ body{
    border: 1px solid lightgray;
    border-radius: 1px;
    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.04);
-   margin-top: 20px;
 }
 
 .logo {
 	width: 350px;
+	margin-bottom: 20px;
 }
 
 .scroll-btn {
 	width: 75px;
 	margin-top: 200px;
+}
+///////////
+//Header//
+//////////
+.header {
+	border: 1px solid lightgray;
+	border-radius: 1px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.07);
+}
+
+.headSearch{
+	display:inline-block;
+	padding:20px;
+}
+
+.header .navigation-k{ //Navigation bar K logo
+	display:inline-block;
+	width:40px;
+	margin-top:20px;
+	margin-left:20px;
+	float:left;
 }
 
 ////////////////
@@ -78,11 +99,12 @@ body{
 }
 
 .member-picture {
-  width: 250px; 
-  margin: 0 auto; 
+  width: 250px;
+  margin: 0 auto;
 }
 
 .member-info-container {
+
     width: 300px;
     margin: 30px;
     display: flex;
@@ -91,7 +113,8 @@ body{
 }
 
 .member-details-container {
-  margin-top: -15px; 
+  margin-top: -15px;
+
 }
 
 .member-details {
@@ -107,6 +130,7 @@ body{
   list-style: none; 
   padding: 3px; 
   font-size: 1.2rem; 
+
 }
 
 

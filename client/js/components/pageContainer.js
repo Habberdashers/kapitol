@@ -39,7 +39,7 @@ class PageContainer extends React.Component {
 			<div className="landing-page">
 				<img className="logo" src="assets/kapitol.png" />
 				<SearchForm onSubmit={this.onSearchSubmit.bind(this)}/>
-				<img onClick={this.routeToAbout.bind(this)}className="scroll-btn" src="assets/scroll-btn.png"/>
+				<img onClick={this.routeToAbout.bind(this)} className="scroll-btn" src="assets/scroll-btn.png"/>
 			</div>
 		)
 	}
