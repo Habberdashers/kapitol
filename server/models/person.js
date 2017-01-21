@@ -4,6 +4,18 @@ var personSchema = mongoose.Schema({
 	name: {
 		type: String, 
 		requied: true 
+	}, 
+	state: {
+		type: String, 
+		required: true
+	}, 
+	district: {
+		type: String,
+		required: true
+	}, 
+	party: {
+		type: String, 
+		required: true
 	}
 })
 
