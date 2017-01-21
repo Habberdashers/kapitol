@@ -6,9 +6,7 @@ const SearchForm = (props) => {
 
 	function grabInput (event) {
 		event.preventDefault();
-		console.log(searchTerm.value);
 		hashHistory.push('/member');
-
 	}
 
 	return (
