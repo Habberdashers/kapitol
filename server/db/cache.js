@@ -31,7 +31,7 @@ module.exports = {
                 filteredMembers.push(member);
             } else if (
                 member.firstName.includes(names[0]) &&
-                member.lastName.includes[names[names.length - 1]]
+                member.lastName.includes(names[names.length - 1])
             ) {
                 filteredMembers.push(member);
             }
