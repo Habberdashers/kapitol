@@ -19,7 +19,7 @@ class PageContainer extends React.Component {
 	onSearchSubmit (searchTerm) {
 		console.log('term', searchTerm);
 		// this.props.dispatch(actions.searchMemberData(searchTerm));
-		hashHistory.push('/member'); 
+		hashHistory.push('/member');
 	}
 
 	routeToAbout () {
