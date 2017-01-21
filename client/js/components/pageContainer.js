@@ -20,8 +20,9 @@ class PageContainer extends React.Component {
 	render () {
 		return (
 			<div className="landing-page">
-				<h1>Kapitol</h1>
+				<img className="logo" src="assets/kapitol.png" />
 				<SearchForm onSubmit={this.onSearchSubmit.bind(this)}/>
+				<img className="scroll-btn" src="assets/scroll-btn.png"/>
 			</div>
 		)
 	}
