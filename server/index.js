@@ -8,6 +8,9 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
     const UserResponseHandler = require('./handlers/user-response-handler');
     const _ = require('underscore');
     const requestHandler = require('./handlers/request-handler');
+    const jsonFile = require('jsonfile');
+    const path = require('path');
+
     requestHandler.makeRequest(
         'https://www.govtrack.us/api/v2/vote_voter/?vote=1&limit=441',
         (error, members) => {
@@ -17,19 +20,24 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
 
             const userResponseHandler = new UserResponseHandler(members.objects);
             userResponseHandler.processData();
-            _.each(userResponseHandler.getParsedMembers(), (member) => {
-                logger(member);
-            });
+            jsonFile.writeFileSync(
+                path.join(__dirname, 'files/members.json'),
+                userResponseHandler.getParsedMembers()
+            );
         }
     );
 } else {
     const bodyParser = require('body-parser');
     const express = require('express');
     const app = express();
+    const memberRoutes = require('./routes/member-routes');
+    const path = require('path');
 
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
-    app.use(express.static(process.env.CLIENT_PATH));
+    //app.use(express.static(process.env.CLIENT_PATH));
+    app.use(express.static(path.join(__dirname, '../client')));
+    app.use('/api/members', memberRoutes);
 
     //var govTrack = require('govtrack-node');
 
