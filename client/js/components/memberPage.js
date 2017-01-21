@@ -36,8 +36,6 @@ class MemberPage extends React.Component {
           </div>
 
         <div className="analytics-container">
-  // 					<BarGraph />
-  // 					<BarGraph />
              <Line />
              <Bar />
         </div>
@@ -53,3 +51,6 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(MemberPage);
+
+	//<BarGraph />
+  // 					<BarGraph />

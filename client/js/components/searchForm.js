@@ -6,7 +6,7 @@ const SearchForm = (props) => {
 
 	function grabInput (event) {
 		event.preventDefault();
-		hashHistory.push('/member');
+		props.onSubmit(searchTerm.value);
 	}
 
 	return (
@@ -21,3 +21,4 @@ const SearchForm = (props) => {
 export default SearchForm;
 
 //<input className="submit-button" type="submit" value="Submit" />
+//

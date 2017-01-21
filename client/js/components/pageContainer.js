@@ -17,6 +17,7 @@ class PageContainer extends React.Component {
 	}
 
 	onSearchSubmit (searchTerm) {
+		console.log('search', searchTerm);
 		let name = searchTerm.trim().split(" ").join("+"); 
 		this.props.dispatch(actions.getMemberDisplay(name))
 			.then(() => this.props.dispatch(actions.getBarData(this.props.member[0].district)))
@@ -36,7 +37,7 @@ class PageContainer extends React.Component {
 		return (
 			<div className="landing-page">
 				<img className="logo" src="assets/kapitol.png" />
-				<SearchForm />
+				<SearchForm onSubmit={this.onSearchSubmit.bind(this)}/>
 				<img onClick={this.routeToAbout.bind(this)}className="scroll-btn" src="assets/scroll-btn.png"/>
 			</div>
 		)
