@@ -36,7 +36,7 @@ class PageContainer extends React.Component {
 		)
 	}
 }
-
+//
 const mapStateToProps = (state) => ({
 	data: [state.data]
 })
