@@ -17,6 +17,7 @@ class PageContainer extends React.Component {
 	}
 
 	onSearchSubmit (searchTerm) {
+
 		let name = searchTerm.trim().split(" ").join("+"); 
 		console.log(name); 
 		this.props.dispatch(actions.getMemberDisplay(name));
