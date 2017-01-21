@@ -21,8 +21,7 @@ class PageContainer extends React.Component {
 	}
 
 	routeToAbout () {
-		console.log('registered click');
-		browserHistory.push('/sample');
+		browserHistory.push('/about');
 	}
 
 	render () {

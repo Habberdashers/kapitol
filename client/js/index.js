@@ -8,15 +8,15 @@ import PageContainer from './components/pageContainer';
 import SearchForm from './components/searchForm';
 import store from './store';
 import {Provider} from 'react-redux';
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 
 
 document.addEventListener('DOMContentLoaded', () => {
 	ReactDOM.render(
 		<Provider store={store}>
-			<Router history={hashHistory}>
+			<Router history={browserHistory}>
 				<Route path="/" component={PageContainer} />
-				<Route path="/test" component={SearchForm} />
+				<Route path="/about" component={SearchForm} />
 			</Router>
 		</Provider>,
 	document.getElementById('app'))});
