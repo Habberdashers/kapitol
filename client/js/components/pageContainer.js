@@ -1,7 +1,8 @@
-import React from 'react'; 
+import React from 'react';
 import SearchForm from './searchForm';
+import Mission from './mission';
 import { connect } from 'react-redux';
-import * as actions from '../actions/actions'; 
+import * as actions from '../actions/actions';
 
 class PageContainer extends React.Component {
 	constructor (props) {
@@ -9,15 +10,14 @@ class PageContainer extends React.Component {
 	}
 
 	getApiData () {
-		this.props.dispatch(actions.getApiData()); 
+		this.props.dispatch(actions.getApiData());
 	}
 
 
 	render () {
 		return (
 			<div>
-				<h1>Kapitol</h1>
-				<SearchForm />
+				<Mission />
 			</div>
 		)
 	}
