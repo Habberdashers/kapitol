@@ -4,6 +4,7 @@ const Mission = (props) => {
 	return (
 		<div className = "mission-main">
 	    <div className = "missionStatement">
+				<img id="logo" src="assets/white-logo.png" />
 				<h3> Transperancy and Clarity, for all.</h3>
 
 				<div id="columns">
@@ -16,4 +17,3 @@ const Mission = (props) => {
 }
 
 export default Mission;
-
