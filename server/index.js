@@ -4,11 +4,26 @@ const config = require('./config');
 const logger = require('./utils/logger');
 
 
-if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'test') {
-    logger('i am alive');
+if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'members') {
+    const UserResponseHandler = require('./handlers/user-response-handler');
+    const _ = require('underscore');
+    const requestHandler = require('./handlers/request-handler');
+    requestHandler.makeRequest(
+        'https://www.govtrack.us/api/v2/vote_voter/?vote=1&limit=441',
+        (error, members) => {
+            if (error) {
+                return logger(error);
+            }
+
+            const userResponseHandler = new UserResponseHandler(members.objects);
+            userResponseHandler.processData();
+            _.each(userResponseHandler.getParsedMembers(), (member) => {
+                logger(member);
+            });
+        }
+    );
 } else {
     const bodyParser = require('body-parser');
-    const path = require('path');
     const express = require('express');
     const app = express();
 
