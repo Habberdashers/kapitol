@@ -63,19 +63,19 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
         {
             label: "Thursday", 
             value: 18
-        }, 
-        {   
-            label: "Friday", 
-            value: 78
-        }, 
-        {
-            label: "Saturday", 
-            value: 56
-        }, 
-        {
-            label: "Sunday", 
-            value: 30
         }
+        // {   
+        //     label: "Friday", 
+        //     value: 78
+        // }, 
+        // {
+        //     label: "Saturday", 
+        //     value: 56
+        // }, 
+        // {
+        //     label: "Sunday", 
+        //     value: 30
+        // }
     ]
 
      const lineData = [

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-var BarChart = require('react-chartjs').Bar;
+var BarChart = require('react-chartjs').HorizontalBar;
 
 class Bar extends React.Component {
 	render () {
