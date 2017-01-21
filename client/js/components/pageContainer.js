@@ -12,15 +12,12 @@ class PageContainer extends React.Component {
 		this.props.dispatch(actions.getApiData()); 
 	}
 
-	grabInput (event) {
-		event.preventDefault();
-		props.onSubmit(input.value)
-	}
 
 	render () {
 		return (
 			<div>
-				<SearchForm grabInput={this.grabInput.bind(this)} />
+				<h1>Kapitol</h1>
+				<SearchForm />
 			</div>
 		)
 	}
