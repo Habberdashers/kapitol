@@ -16,11 +16,11 @@ class MemberPage extends React.Component {
 		console.log('member', this.props.member)
 			var memberData = this.props.member.map(function(memberObj, idx) {
 				return (
-					<ul key={idx}>
-						<li> {memberObj.name}</li>
-						<li>{memberObj.state}</li>
-						<li>{memberObj.district}</li>
-						<li>{memberObj.party}</li>
+					<ul className="member-details" key={idx}>
+						<li><strong>Name:</strong> {memberObj.name}</li>
+						<li><strong>State:</strong> {memberObj.state}</li>
+						<li><strong>District:</strong> {memberObj.district}</li>
+						<li><strong>Party:</strong> {memberObj.party}</li>
 					</ul>
 				)
 			})
@@ -31,7 +31,7 @@ class MemberPage extends React.Component {
 				</header>
 				<div className="member-info-container">
 					<img className="member-picture" src="http://paulryan.house.gov/uploadedphotos/highresolution/3f3943d8-cea4-4f6b-96ac-3c25fd3ef24e.jpg"/>
-					<div className="member-stats">
+					<div className="member-details-container">
 						{memberData}
 					</div>
 				</div>
