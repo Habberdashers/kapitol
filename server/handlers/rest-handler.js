@@ -2,6 +2,7 @@
 
 const _ = require('underscore');
 const http = require('http');
+const https = require('https');
 const logger = require('./../utils/logger');
 
 
@@ -33,6 +34,22 @@ class RestHandler {
         req.end();
     };
 
+    getRequest(options, callback) {
+        if (options) {
+            options.method = 'GET';
+            this._setOptions(options);
+        } else if (!this._method) {
+            this._method = 'GET';
+        }
+
+        options = this._createRestOptions();
+        this._callback = callback;
+        const req = https.request(options, this._handleResponseData.bind(this));
+        req.on('error', this._handleError.bind(this));
+        req.write(JSON.stringify(this._payload));
+        req.end();
+    };
+
     _handleResponseData(response) {
         logger(
             'Got response from request with status:',
@@ -44,6 +61,7 @@ class RestHandler {
         let data = '';
         response.setEncoding('utf8');
         response.on('data', function(chunk) {
+            logger('got chunk:', chunk);
             data += chunk;
         });
 
@@ -55,7 +73,7 @@ class RestHandler {
     };
 
     _handleError(error) {
-        logger('Error failed to make post request. Failed with error', error);
+        logger('Error failed to make request. Failed with error', error);
         if (this._callback) {
             this._callback(error, null);
         }

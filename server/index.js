@@ -1,18 +1,26 @@
-import 'babel-polyfill';
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv'; 
-dotenv.config({ silent: true}); 
-mongoose.Promise = global.Promise; 
 
-import Person from './models/person'; 
+if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'members') {
+    const UserResponseHandler = require('./handlers/user-response-handler');
+    const _ = require('underscore');
+    const requestHandler = require('./handlers/request-handler');
+    requestHandler.makeRequest(
+        'https://www.govtrack.us/api/v2/vote_voter/?vote=1&limit=441',
+        (error, members) => {
+            if (error) {
+                return logger(error);
+            }
 
-const jsonParser = bodyParser.json();
-const HOST = process.env.HOST;
-const PORT = process.env.PORT || 8080;
-const app = express();
-
+            const userResponseHandler = new UserResponseHandler(members.objects);
+            userResponseHandler.processData();
+            _.each(userResponseHandler.getParsedMembers(), (member) => {
+                logger(member);
+            });
+        }
+    );
+} else {
+    const bodyParser = require('body-parser');
+    const express = require('express');
+    const app = express();
 
 app.use(express.static(process.env.CLIENT_PATH));
 
