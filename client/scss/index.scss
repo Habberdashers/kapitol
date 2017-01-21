@@ -83,16 +83,30 @@ body{
 }
 
 .member-info-container {
-  width: 300px; 
-  padding: 10px; 
-  margin: 30px;  
+    width: 300px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.member-details-container {
+  margin-top: -15px; 
 }
 
 .member-details {
-  padding-left: 0; 
+  padding-left: 0;
+  text-align: center;  
+}
+
+.member-details li:first-child { 
+    color: red; 
+    font-size: 1.8rem;
 }
 .member-details li {
   list-style: none; 
+  padding: 3px; 
+  font-size: 1.2rem; 
 }
 
 

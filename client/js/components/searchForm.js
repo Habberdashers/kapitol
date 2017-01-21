@@ -5,14 +5,17 @@ const SearchForm = (props) => {
 
 	function grabInput (event) {
 		event.preventDefault();
-		console.log(searchTerm.value);
 		props.onSubmit(searchTerm.value);
+	}
+
+	function onChange (event) {
+		console.log(searchTerm.value);
 	}
 
 	return (
 		<div className="search-container">
 			<form className="search-form" onSubmit={grabInput}>
-	  			<input className="user-input-box" type="text" placeholder="" ref={element => searchTerm = element} />
+	  			<input className="user-input-box" type="text" onChange={onChange} placeholder="" ref={element => searchTerm = element} />
 			</form>
 		</div>
 	)
