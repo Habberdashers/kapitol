@@ -1,3 +1,8 @@
+'use strict';
+
+const config = require('./config');
+const logger = require('./utils/logger');
+
 
 if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'members') {
     const UserResponseHandler = require('./handlers/user-response-handler');
@@ -22,92 +27,78 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
     const express = require('express');
     const app = express();
 
-app.use(express.static(process.env.CLIENT_PATH));
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json());
+    app.use(express.static(process.env.CLIENT_PATH));
 
-var govTrack = require('govtrack-node');
- 
-// list current members of Congress 
+    //var govTrack = require('govtrack-node');
+
+// list current members of Congress
 // govTrack.findRole({ current: true }, function(err, res) {
 //   if (!err) {
-//     // res contains JSON data response 
-//     console.log(res); 
+//     // res contains JSON data response
+//     console.log(res);
 //   }
 // });
- 
+//
 // govTrack.findPerson({ gender: 'male', lastname: 'smith' }, function(err, res) {
 //   if (!err) {
-//     console.log(res); 
+//     console.log(res);
 //   }
 // });
 
-app.use(function (err, req, res, next) {
-  console.error(err.stack)
-  res.status(500).send(err);
-})
-
-app.get('/api', (req, res) => {
-   govTrack.findPerson({gender: 'male'}, function(err, data) {
-        if (err) {
-            console.log(err)
-            res.status(500).json({"message": 'something blew up'})
-        }
-        else {
-            console.log(res);
-            res.status(200).json({data});
-        } 
-    });
-})
-
-
-app.get('/members/:searchTerm', (req, res) => {
-    console.log(req.params); 
-})
-
-
-const temp = {
-    "name": "Paul Ryan", 
-    "state": "Wisconsin", 
-    "district": "1D", 
-    "party": "Republican"
-}
-
-app.get('/members/', (req, res) => {
-    res.status(200).json(temp); 
-
-    // Person.find({}, (err, data) => {
-    //     if (err) {
-    //       console.log('error was made')
-    //         console.log(err)
-    //         res.send(err)
-    //     }
-    //     res.status(200).json(data)
-    // })
-})
-
-app.post('/members', jsonParser, (req, res) => {
-  Person.create(req.body)
-    .then(data => res.status(200).json(data))
-    .catch(err => console.log(err))
-})
-
-function runServer() {
-    var databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://user:kapitol@ds117819.mlab.com:17819/kapitol'  
-    return new Promise((resolve, reject) => {
-        app.listen(PORT, HOST, (err) => {
+    app.get('/api', (req, res) => {
+        govTrack.findPerson({gender: 'male'}, function(err, data) {
             if (err) {
-                console.error(err);
-                reject(err);
+                console.log(err)
+                res.status(500).json({"message": 'something blew up'})
+            } else {
+                console.log(res);
+                res.status(200).json({data});
             }
-
-            const host = HOST || 'localhost';
-            console.log(`Listening on ${host}:${PORT}`);
         });
+    })
+
+
+    app.get('/members/:searchTerm', (req, res) => {
+        console.log(req.params);
+    })
+
+
+    app.get('/members', bodyParser.json(), (req, res) => {
+        Person.find({}, (err, data) => {
+            if (err) {
+                console.log('error was made');
+                console.log(err)
+                res.send(err)
+            }
+            res.status(200).json(data)
+        })
     });
+
+    app.post('/members', bodyParser.json(), (req, res) => {
+        Person.create(req.body)
+            .then(data => res.status(200).json(data))
+            .catch(err => console.log(err))
+    });
+
+    function runServer() {
+        return new Promise((resolve, reject) => {
+            app.listen(config.app.port, config.app.host, (err) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                }
+
+                console.log(`Listening on ${config.app.host}:${config.app.port}`);
+            });
+        });
+    }
+
+    if (require.main === module) {
+        runServer();
+    }
+
+
+    console.log(`Server running in soup n' stars mode`);
 }
-
-if (require.main === module) {
-    runServer();
-}
-
-
-console.log(`Server running in ${process.env.NODE_ENV} mode`);
