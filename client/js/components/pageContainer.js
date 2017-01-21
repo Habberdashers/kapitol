@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchForm from './searchForm';
-import Mission from './mission';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 
@@ -13,11 +12,17 @@ class PageContainer extends React.Component {
 		this.props.dispatch(actions.getApiData());
 	}
 
+	onSearchSubmit (searchTerm) {
+		console.log('term', searchTerm);
+		this.props.dispatch(actions.getMemberData(searchTerm));
+	}
 
 	render () {
 		return (
-			<div>
-				<Mission />
+			<div className="landing-page">
+				<img className="logo" src="assets/kapitol.png" />
+				<SearchForm onSubmit={this.onSearchSubmit.bind(this)}/>
+				<img className="scroll-btn" src="assets/scroll-btn.png"/>
 			</div>
 		)
 	}

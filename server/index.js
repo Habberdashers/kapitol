@@ -46,7 +46,11 @@ app.get('/api', (req, res) => {
 })
 
 
-app.get('/members', jsonParser, (req, res) => {
+app.get('/members/:searchTerm', (req, res) => {
+    console.log(req.params); 
+})
+
+app.get('/members/', jsonParser, (req, res) => {
     Person.find({}, (err, data) => {
         if (err) {
           console.log('error was made')
