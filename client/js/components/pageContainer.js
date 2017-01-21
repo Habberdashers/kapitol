@@ -1,7 +1,10 @@
 import React from 'react'; 
 import SearchForm from './searchForm';
 import { connect } from 'react-redux';
-import * as actions from '../actions/actions'; 
+import * as actions from '../actions/actions';
+import {Link} from 'react-router';
+import {browserHistory} from 'react-router';
+
 
 class PageContainer extends React.Component {
 	constructor (props) {
@@ -17,12 +20,17 @@ class PageContainer extends React.Component {
 		this.props.dispatch(actions.getMemberData(searchTerm));
 	}
 
+	routeToAbout () {
+		console.log('registered click');
+		browserHistory.push('/sample');
+	}
+
 	render () {
 		return (
 			<div className="landing-page">
 				<img className="logo" src="assets/kapitol.png" />
 				<SearchForm onSubmit={this.onSearchSubmit.bind(this)}/>
-				<img className="scroll-btn" src="assets/scroll-btn.png"/>
+				<img onClick={this.routeToAbout.bind(this)}className="scroll-btn" src="assets/scroll-btn.png"/>
 			</div>
 		)
 	}
