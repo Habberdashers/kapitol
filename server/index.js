@@ -35,8 +35,7 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
 
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
-    //app.use(express.static(process.env.CLIENT_PATH));
-    app.use(express.static(path.join(__dirname, '../client')));
+    app.use(express.static(process.env.CLIENT_PATH));
     app.use('/api/members', memberRoutes);
 
     //var govTrack = require('govtrack-node');
