@@ -6,7 +6,7 @@ const SearchForm = (props) => {
 
 	function grabInput (event) {
 		event.preventDefault();
-		hashHistory.push('/member');
+		props.onSubmit(searchTerm.value);
 	}
 
 	return (
