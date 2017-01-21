@@ -100,7 +100,23 @@ body{
 
 .member-picture {
   width: 250px;
+  margin: 0 auto;
 }
+
+.member-info-container {
+  width: 300px;
+  padding: 10px;
+  margin: 30px;
+}
+
+.member-details {
+  padding-left: 0;
+}
+.member-details li {
+  list-style: none;
+}
+
+
 
 @media screen
   and (min-device-width: 1200px)
