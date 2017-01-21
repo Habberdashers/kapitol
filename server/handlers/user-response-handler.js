@@ -25,6 +25,10 @@ class UserResponseHandler {
         }, this);
     };
 
+    processFromFile() {
+        this.members
+    }
+
     getParsedMembers() {
         return this._members;
     };
