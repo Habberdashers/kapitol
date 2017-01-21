@@ -64,8 +64,7 @@ app.post('/members', jsonParser, (req, res) => {
 })
 
 function runServer() {
-    var databaseUri = process.env.DATABASE_URI || global.databaseUri //|| 'mongodb://user:kapitol@ds117819.mlab.com:17819/kapitol';
-    mongoose.connect(databaseUri)
+    var databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://user:kapitol@ds117819.mlab.com:17819/kapitol'  
     return new Promise((resolve, reject) => {
         app.listen(PORT, HOST, (err) => {
             if (err) {
