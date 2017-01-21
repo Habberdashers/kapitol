@@ -6,7 +6,9 @@ const _ = require('underscore');
 
 
 module.exports = {
-    _filePath: path.join(__dirname, '../files/members.json'),
+    _senateFilePath: path.join(__dirname, '../files/senate-members-clean.json'),
+
+    _houseFilePath: path.join(__dirname, '../files/house-members-clean.json'),
 
     _members: null,
 
@@ -15,7 +17,9 @@ module.exports = {
             return this._members;
         }
 
-        this._members = jsonFile.readFileSync(this._filePath);
+        let senateMembers = jsonFile.readFileSync(this._senateFilePath);
+        let houseMembers = jsonFile.readFileSync(this._houseFilePath);
+        this._members = senateMembers.concat(houseMembers);
         return this._members;
     },
 
@@ -30,10 +34,8 @@ module.exports = {
             } else if (names.length === 1 && member.firstName.toLowerCase().includes(names[0].toLowerCase())) {
                 filteredMembers.push(member);
             } else if (
-
                 member.firstName.toLowerCase().includes(names[0].toLowerCase()) &&
                 member.lastName.toLowerCase().includes(names[names.length - 1].toLowerCase())
-
             ) {
                 filteredMembers.push(member);
             }

@@ -35,6 +35,20 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
     });
 
     sunlightHandler.fetch();
+} else if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'house') {
+    const _ = require('underscore');
+    const HouseHandler = require('./handlers/house-handler');
+
+    const houseHandler = new HouseHandler();
+    houseHandler.processData();
+    logger(houseHandler.getParsedMembers());
+} else if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'senate') {
+    const _ = require('underscore');
+    const SenateHandler = require('./handlers/senate-handler');
+
+    const senateHandler = new SenateHandler();
+    senateHandler.processData();
+    logger(senateHandler.getParsedMembers());
 } else {
     const bodyParser = require('body-parser');
     const express = require('express');
