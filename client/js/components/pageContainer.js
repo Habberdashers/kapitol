@@ -16,12 +16,6 @@ class PageContainer extends React.Component {
 		this.props.dispatch(actions.getApiData());
 	}
 
-	onSearchSubmit (searchTerm) {
-		console.log('term', searchTerm);
-		// this.props.dispatch(actions.searchMemberData(searchTerm));
-		hashHistory.push('/member');
-	}
-
 	routeToAbout () {
 		hashHistory.push('/about');
 	}
@@ -30,7 +24,7 @@ class PageContainer extends React.Component {
 		return (
 			<div className="landing-page">
 				<img className="logo" src="assets/kapitol.png" />
-				<SearchForm onSubmit={this.onSearchSubmit.bind(this)}/>
+				<SearchForm />
 				<img onClick={this.routeToAbout.bind(this)}className="scroll-btn" src="assets/scroll-btn.png"/>
 			</div>
 		)

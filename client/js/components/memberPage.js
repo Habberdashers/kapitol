@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import SearchForm from './searchForm';
 import Header from './header';
+import BarGraph from './barGraph';
 
 class MemberPage extends React.Component {
 	constructor (props) {
@@ -26,14 +27,21 @@ class MemberPage extends React.Component {
 				)
 			})
 		return (
+			<div>
+			<Header/>
 			<div className="members-container">
-				<Header/>
+
 				<div className="member-info-container">
 					<img className="member-picture" src="http://paulryan.house.gov/uploadedphotos/highresolution/3f3943d8-cea4-4f6b-96ac-3c25fd3ef24e.jpg"/>
 					<div className="member-details-container">
 						{memberData}
 					</div>
 				</div>
+				<div className="analytics-container">
+					<BarGraph />
+					<BarGraph />
+				</div>
+			</div>
 			</div>
 		)
 	}
