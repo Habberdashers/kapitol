@@ -31,7 +31,6 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
     const express = require('express');
     const app = express();
     const memberRoutes = require('./routes/member-routes');
-    const path = require('path');
 
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
@@ -54,6 +53,8 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
 //   }
 // });
 
+
+
     app.get('/api', (req, res) => {
         govTrack.findPerson({gender: 'male'}, function(err, data) {
             if (err) {
@@ -71,16 +72,24 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
         console.log(req.params);
     })
 
+    const memberData = {
+        "name" : "Paul Ryan",
+        "state" : "Wisconsin",
+        "district" : "1D",
+        "party" : "Republican"
+    }
+
 
     app.get('/members', bodyParser.json(), (req, res) => {
-        Person.find({}, (err, data) => {
-            if (err) {
-                console.log('error was made');
-                console.log(err)
-                res.send(err)
-            }
-            res.status(200).json(data)
-        })
+        res.status(200).send(memberData);
+        // Person.find({}, (err, data) => {
+        //     if (err) {
+        //         console.log('error was made');
+        //         console.log(err)
+        //         res.send(err)
+        //     }
+        //     res.status(200).json(data)
+        // })
     });
 
     app.post('/members', bodyParser.json(), (req, res) => {

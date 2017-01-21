@@ -9,13 +9,13 @@ import Mission from './components/mission';
 import MemberPage from './components/memberPage'; 
 import store from './store';
 import {Provider} from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
 
 document.addEventListener('DOMContentLoaded', () => {
 	ReactDOM.render(
 		<Provider store={store}>
-			<Router history={browserHistory}>
+			<Router history={hashHistory}>
 				<Route path="/" component={PageContainer} />
 				<Route path="/about" component={Mission} />
 				<Route path="/member" component={MemberPage} />

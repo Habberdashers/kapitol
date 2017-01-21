@@ -4,7 +4,7 @@ import Mission from './mission';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import {Link} from 'react-router';
-import {browserHistory} from 'react-router';
+import {hashHistory} from 'react-router';
 
 
 class PageContainer extends React.Component {
@@ -19,11 +19,11 @@ class PageContainer extends React.Component {
 	onSearchSubmit (searchTerm) {
 		console.log('term', searchTerm);
 		// this.props.dispatch(actions.searchMemberData(searchTerm));
-		browserHistory.push('/member'); 
+		hashHistory.push('/member'); 
 	}
 
 	routeToAbout () {
-		browserHistory.push('/about');
+		hashHistory.push('/about');
 	}
 
 	render () {
