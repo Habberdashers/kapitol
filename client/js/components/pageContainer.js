@@ -17,9 +17,17 @@ class PageContainer extends React.Component {
 	}
 
 	onSearchSubmit (searchTerm) {
-		console.log('term', searchTerm);
-		// this.props.dispatch(actions.searchMemberData(searchTerm));
-		hashHistory.push('/member');
+		let name = searchTerm.trim().split(" ").join("+"); 
+		console.log(name); 
+		this.props.dispatch(actions.getMemberDisplay(name));
+		if (this.props.member.length > 0) {
+			console.log('member from landing-page', this.props.member)
+			hashHistory.push('/member'); 
+		}
+	}
+
+	onInputChange (term) {
+		console.log(term);
 	}
 
 	routeToAbout () {
@@ -31,14 +39,14 @@ class PageContainer extends React.Component {
 			<div className="landing-page">
 				<img className="logo" src="assets/kapitol.png" />
 				<SearchForm onSubmit={this.onSearchSubmit.bind(this)}/>
-				<img onClick={this.routeToAbout.bind(this)}className="scroll-btn" src="assets/scroll-btn.png"/>
+				<img onClick={this.routeToAbout.bind(this)} className="scroll-btn" src="assets/scroll-btn.png"/>
 			</div>
 		)
 	}
 }
 //
 const mapStateToProps = (state) => ({
-	data: [state.data]
+	member: state.member
 })
 
 export default connect(mapStateToProps)(PageContainer);

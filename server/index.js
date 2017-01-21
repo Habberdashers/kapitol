@@ -37,23 +37,6 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
     app.use(express.static(process.env.CLIENT_PATH));
     app.use('/api/members', memberRoutes);
 
-    //var govTrack = require('govtrack-node');
-
-// list current members of Congress
-// govTrack.findRole({ current: true }, function(err, res) {
-//   if (!err) {
-//     // res contains JSON data response
-//     console.log(res);
-//   }
-// });
-//
-// govTrack.findPerson({ gender: 'male', lastname: 'smith' }, function(err, res) {
-//   if (!err) {
-//     console.log(res);
-//   }
-// });
-
-
 
     app.get('/api', (req, res) => {
         govTrack.findPerson({gender: 'male'}, function(err, data) {

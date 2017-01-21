@@ -14,8 +14,8 @@ import 'isomorphic-fetch'
 // 	});
 // }
 
-export const getMemberDisplay = () => dispatch => {
-	return fetch('/members')
+export const getMemberDisplay = (name) => dispatch => {
+	return fetch(`api/members/get-members/${name}`)
 	.then(res => {
 		if (!res.ok) {
 			throw new Error (res.status); 

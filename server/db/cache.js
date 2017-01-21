@@ -20,23 +20,27 @@ module.exports = {
     },
 
     filterMembersByName: function(name, callback) {
-        let names = name.split(' ');
+        console.log('incoming name', name)
+        let names = name.split('+');
         names = _.without(names, ' ');
+        console.log('name', names)
         const members = this.getMembers();
         let filteredMembers = [];
         _.each(members, function(member) {
             if (names.length === 0) {
                 filteredMembers.push(member);
-            } else if (names.length === 1 && member.firstName.includes(names[0])) {
+            } else if (names.length === 1 && member.firstName.toLowerCase().includes(names[0].toLowerCase())) {
                 filteredMembers.push(member);
             } else if (
-                member.firstName.includes(names[0]) &&
-                member.lastName.includes(names[names.length - 1])
+
+                member.firstName.toLowerCase().includes(names[0].toLowerCase()) &&
+                member.lastName.toLowerCase().includes(names[names.length - 1].toLowerCase())
+
             ) {
                 filteredMembers.push(member);
             }
         });
-
+        console.log('outcoming', filteredMembers);
         callback(filteredMembers);
     }
 };
