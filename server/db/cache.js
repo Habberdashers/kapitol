@@ -20,10 +20,8 @@ module.exports = {
     },
 
     filterMembersByName: function(name, callback) {
-        console.log('incoming name', name)
         let names = name.split('+');
         names = _.without(names, ' ');
-        console.log('name', names)
         const members = this.getMembers();
         let filteredMembers = [];
         _.each(members, function(member) {
@@ -40,7 +38,6 @@ module.exports = {
                 filteredMembers.push(member);
             }
         });
-        console.log('outcoming', filteredMembers);
         callback(filteredMembers);
     }
 };

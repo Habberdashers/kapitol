@@ -38,48 +38,77 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
     app.use('/api/members', memberRoutes);
 
 
-    app.get('/api', (req, res) => {
-        govTrack.findPerson({gender: 'male'}, function(err, data) {
-            if (err) {
-                console.log(err)
-                res.status(500).json({"message": 'something blew up'})
-            } else {
-                console.log(res);
-                res.status(200).json({data});
-            }
-        });
-    })
+    const barData = [
+        {
+            label: "Monday",
+            value: 100
+        },
+        {   
+            label: "Tuesday",
+            value: 89
+        }, 
+        {
+            label: "Wednesday", 
+            value: 23
+        }, 
+        {
+            label: "Thursday", 
+            value: 18
+        }, 
+        {   
+            label: "Friday", 
+            value: 78
+        }, 
+        {
+            label: "Saturday", 
+            value: 56
+        }, 
+        {
+            label: "Sunday", 
+            value: 30
+        }
+    ]
 
+     const lineData = [
+        {
+            label: "Red",
+            value: 10
+        },
+        {   
+            label: "Orange",
+            value: 84
+        }, 
+        {
+            label: "Yellow", 
+            value: 23
+        }, 
+        {
+            label: "Green", 
+            value: 34
+        }, 
+        {   
+            label: "Blue", 
+            value: 78
+        }, 
+        {
+            label: "Indigo", 
+            value: 73
+        }, 
+        {
+            label: "Violet", 
+            value: 100
+        }
+    ]
 
-    app.get('/members/:searchTerm', (req, res) => {
-        console.log(req.params);
-    })
-
-    const memberData = {
-        "name" : "Paul Ryan",
-        "state" : "Wisconsin",
-        "district" : "1D",
-        "party" : "Republican"
-    }
-
-
-    app.get('/members', bodyParser.json(), (req, res) => {
-        res.status(200).send(memberData);
-        // Person.find({}, (err, data) => {
-        //     if (err) {
-        //         console.log('error was made');
-        //         console.log(err)
-        //         res.send(err)
-        //     }
-        //     res.status(200).json(data)
-        // })
+    app.get('/barData/:id', bodyParser.json(), (req, res) => {
+        console.log(req.params)
+        res.status(200).send(barData);
     });
 
-    app.post('/members', bodyParser.json(), (req, res) => {
-        Person.create(req.body)
-            .then(data => res.status(200).json(data))
-            .catch(err => console.log(err))
+     app.get('/lineData/:id', (req, res) => {
+        res.status(200).send(lineData);
     });
+
 
     function runServer() {
         return new Promise((resolve, reject) => {

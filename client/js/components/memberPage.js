@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import SearchForm from './searchForm';
 import Header from './header';
+import Line from './lineChart';
+import Bar from './barGraph';
 
 class MemberPage extends React.Component {
 	constructor (props) {
@@ -12,7 +14,7 @@ class MemberPage extends React.Component {
 
 	render () {
 		var memberData = this.props.member.map(function(member, idx) {
-			console.log('member from map', member)
+		
 			return (
 				<ul className="member-details" key={idx}>
 					<li>{member.firstName} {member.lastName}</li>
@@ -29,6 +31,10 @@ class MemberPage extends React.Component {
 					<div className="member-details-container">
 						{memberData}
 					</div>
+				</div>
+				<div className="graph-container">
+					<Line />
+					<Bar />
 				</div>
 			</div>
 		)
