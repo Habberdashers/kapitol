@@ -13,8 +13,8 @@ router.get('/get-members/:searchTerm', function(req, res) {
     });
 });
 
-router.get('/member-analytics', function(req, res) {
-    const values = cache.runAnalytics(req.body.party);
+router.post('/member-analytics', function(req, res) {
+    const values = cache.runAnalytics(null, req.body.party);
     logger('generated values:', values);
     jsonResponse(res, 200, null, values);
 });
