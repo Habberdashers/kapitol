@@ -15,30 +15,39 @@ class MemberPage extends React.Component {
 
 	render () {
 		var memberData = this.props.member.map(function(member, idx) {
-		
-			return (
-				<ul className="member-details" key={idx}>
-					<li>{member.firstName} {member.lastName}</li>
-					<li><strong>State | District:</strong> {member.state} | {member.district}</li>
-					<li><strong>Party:</strong> {member.party}</li>
-				</ul>
-			)
+			if (idx === 0 ) {
+				return (
+					<ul className="member-details" key={idx}>
+						<li>{member.firstName} {member.lastName}</li>
+						<li><strong>State | District:</strong> {member.state} | {member.district}</li>
+						<li><strong>Party:</strong> {member.party}</li>
+					</ul>
+				)
+			} 
+			else {
+					return;
+			}
 		})
 		return (
-			<div>
+		<div>
           <Header/>
           <div className="members-container">
-          <div className="member-info-container">
-              <img className="member-picture" src="http://paulryan.house.gov/uploadedphotos/highresolution/3f3943d8-cea4-4f6b-96ac-3c25fd3ef24e.jpg"/>
-              <div className="member-details-container">
-                {memberData}
-              </div>
-          </div>
-
-        <div className="analytics-container">
-             <Line />
-             <Bar />
-        </div>
+	          <div className="member-info-container">
+	              <img className="member-picture" src="http://paulryan.house.gov/uploadedphotos/highresolution/3f3943d8-cea4-4f6b-96ac-3c25fd3ef24e.jpg"/>
+	              <div className="member-details-container">
+	                {memberData}
+	              </div>
+	          </div>
+				<div className="analytics-container">
+					<div className="graphs">
+						<div className="line">
+             			<Line />
+             		</div>
+             		<div className="bar">
+             			<Bar />
+             		</div>
+             	</div>
+        		</div>
 			</div>
      </div>
 		)
