@@ -27,11 +27,11 @@ module.exports = {
     },
 
     issueRanking: {
-        climateChange: 0.7,
-        gayMarriage: 0.6,
-        gunController: 0.3,
-        healthCare: 0.4,
-        abortion: 0.4
+        climateChange: 0.5,
+        gayMarriage: 0.5,
+        gunController: 0.5,
+        healthCare: 0.5,
+        abortion: 0.5
     },
 
     getMembers: function() {
@@ -71,26 +71,31 @@ module.exports = {
     },
 
     runAnalytics: function(memberID, party) {
+        party = party.toLowerCase();
         const climateScore = this.scoreForText(this._issues.climateChange, party);
         const gayMarriage = this.scoreForText(this._issues.gayMarriage, party);
         const gunController = this.scoreForText(this._issues.gunController, party);
         const healthCare = this.scoreForText(this._issues.healthCare, party);
         const abortion = this.scoreForText(this._issues.abortion, party);
-        party = party.toLowerCase();
         return [{
-            'climate score': climateScore
+            label: 'Climate Score',
+            value: 100.0*climateScore
         }, {
-            'gay marriage': gayMarriage
+            label: 'Gay Marriage',
+            value: 100.0*gayMarriage
         }, {
-            'gun control': gunController
+            label: 'Gun Rights',
+            value: 100.0*gunController
         }, {
-            'health care': healthCare
+            label: 'Health Care',
+            value: 100.0*healthCare
         }, {
-            'abortion': abortion
+            label: 'Abortion',
+            value: 100.0*abortion
         }];
     },
 
-    scoreForText: function(text, party) {
+    scoreForText: function(text, party, column) {
         let numberOfHits = 0;
         let score = 0.0;
         //logger('text:', text, 'party:', party);
@@ -103,17 +108,30 @@ module.exports = {
         //      }
         // }, this);
 
-        let total = Math.random()/2.0;
-        //let total = score/numberOfHits;
-        if (party === 'r') {
-            total -= this.scaleValue();
+        let total;
+        if (party === 'd' && column !== 'gunRights') {
+            total = 0.8;
+        } else if (party === 'd' && column === 'gunRights') {
+            total = 0.2;
+        } else if (party === 'r' && column !== 'gunRights') {
+            total = 0.2;
+        } else {
+            total = 0.8;
         }
+
+        let flag = Math.random();
+        if (flag < 0.5) {
+            flag = -1.0*flag;
+        }
+
+        total += flag;
 
         if (total < 0) {
             total = Math.random() / 10.0;
+        } else if (total > 1.0) {
+            total = 0.85 + Math.random() / 10.0
         }
 
-        logger(total);
         return total;
     }
 };
