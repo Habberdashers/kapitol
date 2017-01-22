@@ -21,7 +21,7 @@ module.exports = {
     _issues: {
         climateChange: jsonFile.readFileSync(path.join(__dirname, '../files/climate-change.json')),
         gayMarriage: jsonFile.readFileSync(path.join(__dirname, '../files/gay-marriage.json')),
-        gunController: jsonFile.readFileSync(path.join(__dirname, '../files/gun-control.json')),
+        gunRights: jsonFile.readFileSync(path.join(__dirname, '../files/gun-control.json')),
         healthCare: jsonFile.readFileSync(path.join(__dirname, '../files/health-care.json')),
         abortion: jsonFile.readFileSync(path.join(__dirname, '../files/abortion.json'))
     },
@@ -29,7 +29,7 @@ module.exports = {
     issueRanking: {
         climateChange: 0.5,
         gayMarriage: 0.5,
-        gunController: 0.5,
+        gunRights: 0.5,
         healthCare: 0.5,
         abortion: 0.5
     },
@@ -72,11 +72,11 @@ module.exports = {
 
     runAnalytics: function(memberID, party) {
         party = party.toLowerCase();
-        const climateScore = this.scoreForText(this._issues.climateChange, party);
-        const gayMarriage = this.scoreForText(this._issues.gayMarriage, party);
-        const gunController = this.scoreForText(this._issues.gunController, party);
-        const healthCare = this.scoreForText(this._issues.healthCare, party);
-        const abortion = this.scoreForText(this._issues.abortion, party);
+        const climateScore = this.scoreForText(this._issues.climateChange, party, 'climateChange');
+        const gayMarriage = this.scoreForText(this._issues.gayMarriage, party, 'gayMarriage');
+        const gunController = this.scoreForText(this._issues.gunController, party, 'gunRights');
+        const healthCare = this.scoreForText(this._issues.healthCare, party, 'healthCare');
+        const abortion = this.scoreForText(this._issues.abortion, party, 'abortion');
         return [{
             label: 'Climate Score',
             value: 100.0*climateScore
@@ -109,27 +109,35 @@ module.exports = {
         // }, this);
 
         let total;
+
+        logger('party:', party, 'column:', column);
+
         if (party === 'd' && column !== 'gunRights') {
-            total = 0.8;
+            total = 0.7;
         } else if (party === 'd' && column === 'gunRights') {
             total = 0.2;
-        } else if (party === 'r' && column !== 'gunRights') {
-            total = 0.2;
-        } else {
+        } else if (party === 'r' && column === 'gunRights') {
             total = 0.8;
+        } else {
+            total = 0.3;
         }
+
+        logger('total', total);
 
         let flag = Math.random();
         if (flag < 0.5) {
-            flag = -1.0*flag;
+            flag = -1.0*flag/5.0;
+        } else {
+            flag = flag/5.0;
         }
 
+        logger('flag:', flag);
         total += flag;
 
-        if (total < 0) {
-            total = Math.random() / 10.0;
+        if (total < 0.0) {
+            total = Math.random() / 7.0;
         } else if (total > 1.0) {
-            total = 0.85 + Math.random() / 10.0
+            total = 0.8 + flag < 0 ? -1.0*Math.random() / 10.0 : Math.random() / 10.0;
         }
 
         return total;
