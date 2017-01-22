@@ -41,7 +41,7 @@ class SunlightHandler {
             if (this._count > this._currentPage * this._fetchSize) {
                 requestHandler.makeRequest(url, this._handleResponse.bind(this));
             } else {
-                jsonFile.writeFileSync(path.join(__dirname, '../files/climate-change.json'), this._fetchedData);
+                jsonFile.writeFileSync(path.join(__dirname, '../files/abortion.json'), this._fetchedData);
                 this._callback(null, this._fetchedData);
             }
         }
