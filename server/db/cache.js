@@ -3,7 +3,7 @@
 const path = require('path');
 const jsonFile = require('jsonfile');
 const _ = require('underscore');
-
+const logger = require('./../utils/logger');
 
 module.exports = {
     _senateFilePath: path.join(__dirname, '../files/senate-members-clean.json'),
@@ -62,6 +62,7 @@ module.exports = {
                 filteredMembers.push(member);
             }
         });
+
         callback(filteredMembers);
     },
 
@@ -69,7 +70,7 @@ module.exports = {
         return Math.random()/5.0
     },
 
-    runAnalytics: function(party) {
+    runAnalytics: function(memberID, party) {
         const climateScore = this.scoreForText(this._issues.climateChange, party);
         const gayMarriage = this.scoreForText(this._issues.gayMarriage, party);
         const gunController = this.scoreForText(this._issues.gunController, party);
@@ -92,16 +93,18 @@ module.exports = {
     scoreForText: function(text, party) {
         let numberOfHits = 0;
         let score = 0.0;
-        const words = text.split(' ');
-        _.each(words, function(word) {
-            const lowercaseWord = word.toLowerCase();
-             if (_.has(this._liberalWeights, lowercaseWord)) {
-                 score += this._liberalWeights[lowercaseWord];
-                 numberOfHits += 1;
-             }
-        }, this);
+        //logger('text:', text, 'party:', party);
+        //const words = text.split(' ');
+        // _.each(words, function(word) {
+        //     const lowercaseWord = word.toLowerCase();
+        //      if (_.has(this._liberalWeights, lowercaseWord)) {
+        //          score += this._liberalWeights[lowercaseWord];
+        //          numberOfHits += 1;
+        //      }
+        // }, this);
 
-        let total = score/numberOfHits;
+        let total = Math.random()/2.0;
+        //let total = score/numberOfHits;
         if (party === 'r') {
             total -= this.scaleValue();
         }
@@ -110,6 +113,7 @@ module.exports = {
             total = Math.random() / 10.0;
         }
 
+        logger(total);
         return total;
     }
 };
