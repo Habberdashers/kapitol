@@ -40,12 +40,7 @@ class MemberPage extends React.Component {
 	          </div>
 				<div className="analytics-container">
 					<div className="graphs">
-						<div className="line">
-             			<Line />
-             		</div>
-             		<div className="bar">
-             			<Bar />
-             		</div>
+             		<Bar />
              	</div>
         		</div>
 			</div>

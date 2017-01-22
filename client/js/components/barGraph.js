@@ -40,6 +40,11 @@ class Bar extends React.Component {
     			]
 		};
 		let chartOptions = {
+			title: {
+				display: true,
+				text: "Political Issues", 
+				fontSize: 16
+			},
         scales: {
             xAxes: [{
                 stacked: true
@@ -49,8 +54,9 @@ class Bar extends React.Component {
             }]
         }
     }
+    //
 		return (
-			<BarChart data={chartData} options={chartOptions} width="600" height="200"/>
+			<BarChart data={chartData} options={chartOptions} width="650" height="350"/>
 		)
 	}
 }

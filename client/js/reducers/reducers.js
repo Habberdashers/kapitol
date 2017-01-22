@@ -13,10 +13,10 @@ export const reducer = (state = initialState, action) => {
 		return update(state, {member: {$set: action.memberData.payload}})  
 	}
 	else if (action.type === actions.BAR_DATA_SUCCESS) {
-		return update(state, {barData: {$set: action.barData}})
+		return update(state, {barData: {$set: action.barData.payload}})
 	}
 	else if (action.type === actions.LINE_DATA_SUCCESS) {
-		return update(state, {lineData: {$set: action.lineData}})
+		return update(state, {lineData: {$set: action.lineData.payload}})
 	}
 	return state; 
 }

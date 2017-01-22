@@ -169,14 +169,10 @@ body{
 }
 
 .graphs {
-  display: flex; 
-  flex-direction: column; 
-  align-items: flex-start;
+  padding: 50px;
+  margin-right: 120px;
 }
 
-.line, .bar {
-  margin: 30px; 
-}
 
 
 @media screen

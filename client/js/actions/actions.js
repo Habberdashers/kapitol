@@ -15,29 +15,29 @@ export const getMemberDisplay = (name) => dispatch => {
 	}); 
 }
 
-export const getBarData = (id, party) => {
-	return dispatch => {
-		console.log('body', JSON.stringify({id, party}))
-		return fetch('/api/members/member-analytics', {
-			method: 'post',
-			headers: {
-				'Content-type': 'application/json charset=utf-8'
-			},
-			body: JSON.stringify({id, party})
-		})
-		.then(response => {
-			if (!response.ok) {
-				const error = new Error(response.statusText)
-				error.response = response
-				throw error
-			}
-			return response
-		})
-		.then(response => response.json())
-		.then(data => dispatch(barDataSuccess(data)))
-		.catch(error => dispatch(barDataError(error)))
-	}
-}
+// export const getBarData = (id, party) => {
+// 	return dispatch => {
+// 		console.log('body', JSON.stringify({id, party}))
+// 		return fetch('/api/members/member-analytics', {
+// 			method: 'post',
+// 			headers: {
+// 				'Content-type': 'application/json charset=utf-8'
+// 			},
+// 			body: JSON.stringify({id, party})
+// 		})
+// 		.then(response => {
+// 			if (!response.ok) {
+// 				const error = new Error(response.statusText)
+// 				error.response = response
+// 				throw error
+// 			}
+// 			return response
+// 		})
+// 		.then(response => response.json())
+// 		.then(data => dispatch(barDataSuccess(data)))
+// 		.catch(error => dispatch(barDataError(error)))
+// 	}
+// }
 
 // export const getLineData = (id, party) => {
 // 	return dispatch => {
@@ -62,19 +62,19 @@ export const getBarData = (id, party) => {
 // 	}
 // }
 
-// export const getBarData = (id) => dispatch => {
-// 	return fetch(`barData/${id}`)
-// 	.then (res => {
-// 		if (!res.ok) {
-// 			throw new Error (res.status); 
-// 		}
-// 		return res.json(); 
-// 	}).then(res => {
-// 		dispatch(barDataSuccess(res))
-// 	}).catch(err => {
-// 		dispatch(barDataError(err))
-// 	});
-// }
+export const getBarData = party => dispatch => {
+	return fetch(`/api/members/member-analytics/${party}`)
+	.then (res => {
+		if (!res.ok) {
+			throw new Error (res.status); 
+		}
+		return res.json(); 
+	}).then(res => {
+		dispatch(barDataSuccess(res))
+	}).catch(err => {
+		dispatch(barDataError(err))
+	});
+}
 
 // export const getLineData = (id) => dispatch => {
 // 	return fetch(`lineData/${id}`)
