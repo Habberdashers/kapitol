@@ -43,7 +43,7 @@ class Line extends React.Component {
 
   	let chartOptions = []; 
   	   
-    return <LineChart data={chartData} options={chartOptions} width="600" height="200" margin-bottom="20px" margin-right="100px" />
+    return <LineChart data={chartData} options={chartOptions} width="600" height="200" />
   }
 }
 

@@ -20,3 +20,27 @@ export const reducer = (state = initialState, action) => {
 	}
 	return state; 
 }
+
+
+// barData: [
+//         {
+//             label: "Abortion",
+//             value: 10
+//         },
+//         {   
+//             label: "Gun Rights",
+//             value: 84
+//         }, 
+//         {
+//             label: "Gay Marriage", 
+//             value: 46
+//         }, 
+//         {
+//             label: "Health Care", 
+//             value: 38
+//         }, 
+//         {   
+//             label: "Climate Change", 
+//             value: 41
+//         }
+//     ],

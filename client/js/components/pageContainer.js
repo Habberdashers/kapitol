@@ -19,9 +19,9 @@ class PageContainer extends React.Component {
 	onSearchSubmit (searchTerm) {
 		console.log('search', searchTerm);
 		let name = searchTerm.trim().split(" ").join("+"); 
-		this.props.dispatch(actions.getMemberDisplay(name))
-			.then(() => this.props.dispatch(actions.getBarData(this.props.member[0].district)))
-			.then(() => this.props.dispatch(actions.getLineData(this.props.member[0].district)))
+			this.props.dispatch(actions.getMemberDisplay(name))
+			.then(() => this.props.dispatch(actions.getBarData(this.props.member[0].bioguideId, this.props.member[0].party)))
+			// .then(() => this.props.dispatch(actions.getLineData(this.props.member[0].bioguideId, this.props.member[0].party)))
 
 		if (this.props.member.length > 0) {
 			hashHistory.push('/member'); 

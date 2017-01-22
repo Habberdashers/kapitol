@@ -50,7 +50,7 @@ class Bar extends React.Component {
         }
     }
 		return (
-			<BarChart data={chartData} options={chartOptions} width="600" height="200" margin-bottom="20px" margin-right="100px"/>
+			<BarChart data={chartData} options={chartOptions} width="600" height="200"/>
 		)
 	}
 }
