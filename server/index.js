@@ -28,13 +28,21 @@ if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'member
     const _ = require('underscore');
     const SunlightHandler = require('./handlers/sunlight-handler');
 
-    const sunlightHandler = new SunlightHandler('bill', 'legislators', 'house', 'climate', function(error, data) {
+    const sunlightHandler = new SunlightHandler('bill', 'legislators', 'house', 'abortion', function(error, data) {
         if (error) return logger(error);
 
         logger('got data with count:', data);
     });
 
     sunlightHandler.fetch();
+} else if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'votes') {
+    const _ = require('underscore');
+    const VoteHandler = require('./handlers/vote-handler');
+    const voteHandler = new VoteHandler('S001197', 'abortion');
+    voteHandler.fetchVotes(function(error, votes) {
+        if (error) return logger(error);
+        logger('got votes:', votes);
+    });
 } else if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'house') {
     const _ = require('underscore');
     const HouseHandler = require('./handlers/house-handler');
