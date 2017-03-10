@@ -1,163 +1,43 @@
-'use strict';
+import 'babel-polyfill';
+import express from 'express';
+import bodyParser from 'body-parser';
+import memberRoutes from './routes/member-routes';
 
-const config = require('./config');
-const logger = require('./utils/logger');
+const jsonParser = bodyParser.json();
+const HOST = process.env.HOST;
+const PORT = process.env.PORT || 8080;
+const app = express();
 
 
-if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'members') {
-    const _ = require('underscore');
-    const requestHandler = require('./handlers/request-handler');
-    const jsonFile = require('jsonfile');
-    const path = require('path');
+app.use(express.static(process.env.CLIENT_PATH));
 
-    requestHandler.makeRequest(
-        'https://congress.api.sunlightfoundation.com/bills',
-        (error, data) => {
-            if (error) {
-                return logger(error);
+// include the module 
+var govTrack = require('govtrack-node');
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(express.static(process.env.CLIENT_PATH));
+app.use('/api/members', memberRoutes);
+
+
+
+function runServer() {
+    return new Promise((resolve, reject) => {
+        app.listen(PORT, HOST, (err) => {
+            if (err) {
+                console.error(err);
+                reject(err);
             }
 
-            logger('count:', data.count);
-
-            _.each(data.results, function(datum) {
-                logger(datum, '\n');
-            });
-        }
-    );
-} else if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'sun') {
-    const _ = require('underscore');
-    const SunlightHandler = require('./handlers/sunlight-handler');
-
-    const sunlightHandler = new SunlightHandler('bill', 'legislators', 'house', 'abortion', function(error, data) {
-        if (error) return logger(error);
-
-        logger('got data with count:', data);
-    });
-
-    sunlightHandler.fetch();
-} else if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'votes') {
-    const _ = require('underscore');
-    const VoteHandler = require('./handlers/vote-handler');
-    const voteHandler = new VoteHandler('S001197', 'abortion');
-    voteHandler.fetchVotes(function(error, votes) {
-        if (error) return logger(error);
-        logger('got votes:', votes);
-    });
-} else if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'house') {
-    const _ = require('underscore');
-    const HouseHandler = require('./handlers/house-handler');
-
-    const houseHandler = new HouseHandler();
-    houseHandler.processData();
-    logger(houseHandler.getParsedMembers());
-} else if (process.argv.length > 2 && process.argv[process.argv.length - 1] === 'senate') {
-    const _ = require('underscore');
-    const SenateHandler = require('./handlers/senate-handler');
-
-    const senateHandler = new SenateHandler();
-    senateHandler.processData();
-    logger(senateHandler.getParsedMembers());
-} else {
-    const bodyParser = require('body-parser');
-    const express = require('express');
-    const app = express();
-    const memberRoutes = require('./routes/member-routes');
-
-    app.use(bodyParser.urlencoded({extended: true}));
-    app.use(bodyParser.json());
-    app.use(express.static(process.env.CLIENT_PATH));
-    app.use('/api/members', memberRoutes);
-
-
-    const barData = [
-        {
-            label: "Monday",
-            value: 100
-        },
-        {   
-            label: "Tuesday",
-            value: 89
-        }, 
-        {
-            label: "Wednesday", 
-            value: 23
-        }, 
-        {
-            label: "Thursday", 
-            value: 18
-        }
-        // {   
-        //     label: "Friday", 
-        //     value: 78
-        // }, 
-        // {
-        //     label: "Saturday", 
-        //     value: 56
-        // }, 
-        // {
-        //     label: "Sunday", 
-        //     value: 30
-        // }
-    ]
-
-     const lineData = [
-        {
-            label: "Red",
-            value: 10
-        },
-        {   
-            label: "Orange",
-            value: 84
-        }, 
-        {
-            label: "Yellow", 
-            value: 23
-        }, 
-        {
-            label: "Green", 
-            value: 34
-        }, 
-        {   
-            label: "Blue", 
-            value: 78
-        }, 
-        {
-            label: "Indigo", 
-            value: 73
-        }, 
-        {
-            label: "Violet", 
-            value: 100
-        }
-    ]
-
-    app.get('/barData/:id', bodyParser.json(), (req, res) => {
-        console.log(req.params)
-        res.status(200).send(barData);
-    });
-
-     app.get('/lineData/:id', (req, res) => {
-        res.status(200).send(lineData);
-    });
-
-
-    function runServer() {
-        return new Promise((resolve, reject) => {
-            app.listen(config.app.port, config.app.host, (err) => {
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                }
-
-                console.log(`Listening on ${config.app.host}:${config.app.port}`);
-            });
+            const host = HOST || 'localhost';
+            console.log(`Listening on ${host}:${PORT}`);
         });
-    }
-
-    if (require.main === module) {
-        runServer();
-    }
-
-
-    console.log(`Server running in soup n' stars mode`);
+    });
 }
+
+if (require.main === module) {
+    runServer();
+}
+
+
+console.log(`Server running in ${process.env.NODE_ENV} mode`);
